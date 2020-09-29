@@ -2,8 +2,8 @@ FROM node:alpine
 
 WORKDIR /usr/app
 
-COPY ./ ./
-
+COPY ./packege.json ./
 RUN npm install
+COPY ./ ./
 
 CMD ["npm", "start"]
