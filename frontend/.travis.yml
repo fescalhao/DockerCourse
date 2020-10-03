@@ -1,0 +1,22 @@
+language: generic
+sudo: required
+servives:
+    - docker
+
+before_install:
+    - docker build -t fescalhao/frontend -f Dockerfile.dev ./
+
+script:
+    - docker run -e CI=true fescalhao/frontend npm run test -- --coverage
+
+deploy:
+    provider: elasticbeanstalk
+    region: "us-east-1"
+    app: "docker-frontend"
+    env: "Docker-env"
+    bucket_name: "elasticbeanstalk-us-easit-1-3064326526479"
+    bucket_path: "docker-frontend"
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
