@@ -21,3 +21,16 @@ after_success:
     - docker push fescalhao/multi-nginx
     - docker push fescalhao/multi-server
     - docker push fescalhao/multi-worker
+
+deploy:
+    edge: true
+    provider: elasticbeanstalk
+    region: us-east-1
+    app: multi-docker
+    env: MultiDocker-env
+    bucket_name: elasticbeanstalk-us-easit-1-3064326535249
+    bucket_path: multi-docker
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
